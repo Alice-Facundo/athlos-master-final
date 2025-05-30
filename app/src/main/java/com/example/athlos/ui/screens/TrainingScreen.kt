@@ -16,19 +16,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale // Importar ContentScale
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.athlos.R // Importar R para acessar drawables
+import com.example.athlos.R
 import com.example.athlos.ui.models.TrainingItem
 
 @Composable
 fun TrainingScreen() {
     val trainingItems = listOf(
-        TrainingItem("Treino de Peito", R.drawable.chest), // Certifique-se de que chest.png/xml existe em res/drawable
-        TrainingItem("Treino de Costas", R.drawable.back),   // Certifique-se de que back.png/xml existe em res/drawable
-        TrainingItem("Treino de Quadríceps", R.drawable.quads), // ...e assim por diante
+        TrainingItem("Treino de Peito", R.drawable.chest),
+        TrainingItem("Treino de Costas", R.drawable.back),
+        TrainingItem("Treino de Quadríceps", R.drawable.quads),
         TrainingItem("Treino de Ombros", R.drawable.shoulder),
         TrainingItem("Treino de Bíceps", R.drawable.biceps),
         TrainingItem("Treino de Tríceps", R.drawable.triceps),
@@ -46,7 +46,7 @@ fun TrainingScreen() {
         Text(
             "Treinos",
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 8.dp) // Adiciona um pequeno padding abaixo do título
+            modifier = Modifier.padding(bottom = 8.dp)
         )
 
         LazyColumn {
@@ -54,20 +54,20 @@ fun TrainingScreen() {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 8.dp), // Espaçamento vertical entre os cartões
-                    elevation = CardDefaults.cardElevation(4.dp) // Elevação para dar um efeito de sombra
+                        .padding(vertical = 8.dp),
+                    elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Row(modifier = Modifier.padding(16.dp)) {
                         Image(
                             painter = painterResource(id = item.imageResId),
                             contentDescription = item.title,
                             modifier = Modifier.size(64.dp),
-                            contentScale = ContentScale.Crop // Adiciona ContentScale para ajustar a imagem
+                            contentScale = ContentScale.Crop
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Text(
                             text = item.title,
-                            style = MaterialTheme.typography.titleMedium, // Estilo para o título do treino
+                            style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }

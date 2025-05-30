@@ -24,16 +24,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.athlos.ui.theme.AthlosTheme
-import com.example.athlos.ui.theme.DarkGreen // Importar DarkGreen
+import com.example.athlos.ui.theme.DarkGreen
 
 @Composable
 fun DiaryScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // USANDO COR DO TEMA
+            .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
-            .verticalScroll(rememberScrollState()), // HABILITANDO ROLAGEM
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // TextView tv_total_kcal_label
@@ -41,17 +41,17 @@ fun DiaryScreen() {
             text = "1200 kcal",
             fontSize = 24.sp,
             style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onPrimary, // Cor do texto baseada no tema
+            color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .background(DarkGreen) // USANDO DARKGREEN DO SEU TEMA
+                .background(DarkGreen)
                 .wrapContentSize(Alignment.Center)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // layout_macros (Row com ProgressBars e Textos)
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
@@ -60,23 +60,21 @@ fun DiaryScreen() {
             MacroProgressItem(
                 label = "CARBOIDRATO",
                 progress = 70,
-                progressColor = Color(0xFFFFC107) // Cor específica para carboidrato
+                progressColor = Color(0xFFFFC107)
             )
             MacroProgressItem(
                 label = "PROTEÍNA",
                 progress = 85,
-                progressColor = Color(0xFFD32F2F) // Cor específica para proteína
+                progressColor = Color(0xFFD32F2F)
             )
             MacroProgressItem(
                 label = "FIBRAS",
                 progress = 60,
-                progressColor = Color(0xFF4CAF50) // Cor específica para fibras
+                progressColor = Color(0xFF4CAF50)
             )
         }
 
-        // Seções de Refeição (Café, Almoço, Jantar, Lanches)
-        // Não é mais necessário um Column aninhado com weight(1f, fill=false)
-        // porque o verticalScroll já está no Column pai.
+
         MealSection(title = "CAFÉ")
         MealSection(title = "ALMOÇO")
         MealSection(title = "JANTAR")
@@ -89,7 +87,7 @@ fun MealSection(title: String) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = title,
-            color = MaterialTheme.colorScheme.onBackground, // USANDO COR DO TEMA
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 18.sp,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(top = 32.dp)
@@ -98,19 +96,19 @@ fun MealSection(title: String) {
         OutlinedTextField(
             value = "",
             onValueChange = { /* TODO: Implementar lógica de estado */ },
-            label = { Text("Adicionar refeição") }, // Texto do label, a cor é definida no `defaultTextFieldColors`
+            label = { Text("Adicionar refeição") },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
-            colors = defaultTextFieldColors() // USANDO CORES DO TEMA PARA CAMPOS DE TEXTO
+            colors = defaultTextFieldColors()
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = "",
             onValueChange = { /* TODO: Implementar lógica de estado */ },
-            label = { Text("Adicionar refeição") }, // Texto do label, a cor é definida no `defaultTextFieldColors`
+            label = { Text("Adicionar refeição") },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
-            colors = defaultTextFieldColors() // USANDO CORES DO TEMA PARA CAMPOS DE TEXTO
+            colors = defaultTextFieldColors()
         )
     }
 }
@@ -119,11 +117,11 @@ fun MealSection(title: String) {
 fun MacroProgressItem(label: String, progress: Int, progressColor: Color) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         val strokeWidth = 8.dp
-        ProgressRing(progress, progressColor, strokeWidth) // Chamando o novo Composable para o Canvas
+        ProgressRing(progress, progressColor, strokeWidth)
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = label,
-            color = MaterialTheme.colorScheme.onBackground, // USANDO COR DO TEMA
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 12.sp,
             style = MaterialTheme.typography.labelSmall
         )
@@ -141,20 +139,20 @@ fun ProgressRing(progress: Int, progressColor: Color, strokeWidth: Dp) {
         )
     }
 
-    // COR DE FUNDO DO CÍRCULO, USANDO CONTEXTO COMPOSABLE
+
     val backgroundRingColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
 
     Canvas(modifier = Modifier.size(80.dp)) {
         val radius = size.minDimension / 2f
 
-        // Desenha o fundo cinza do anel
+
         drawCircle(
             color = backgroundRingColor,
             radius = radius,
             style = Stroke(width = strokeWidth.toPx())
         )
 
-        // Desenha o progresso como um arco
+
         drawArc(
             color = progressColor,
             startAngle = 270f,
@@ -173,12 +171,12 @@ private fun defaultTextFieldColors() = OutlinedTextFieldDefaults.colors(
     focusedTextColor = MaterialTheme.colorScheme.onSurface,
     unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
     cursorColor = MaterialTheme.colorScheme.primary,
-    focusedContainerColor = MaterialTheme.colorScheme.surface, // USANDO CORES DO TEMA
-    unfocusedContainerColor = MaterialTheme.colorScheme.surface, // USANDO CORES DO TEMA
-    focusedLabelColor = MaterialTheme.colorScheme.onSurface, // USANDO CORES DO TEMA
-    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface, // USANDO CORES DO TEMA
-    focusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), // USANDO CORES DO TEMA
-    unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) // USANDO CORES DO TEMA
+    focusedContainerColor = MaterialTheme.colorScheme.surface,
+    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+    focusedLabelColor = MaterialTheme.colorScheme.onSurface,
+    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
+    focusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+    unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
 )
 
 @Preview(showBackground = true)
